@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kalkulator</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Kalkulatorek</h1>
+        <h2>Podaj dane do operacji:</h2>
+        <form method="post" action="CalcServlet">
+            <input type="text" id="num1" name="num1">
+            <select name="op" id="op">
+            <option value="add">+</option>
+            <option value="subtract">-</option>
+            <option value="multiply">*</option>
+            <option value="divide">/</option>
+            </select>
+            <input type="text" id="num2" name="num2">
+            <input type="submit" value="=">
+        </form> 
+
+    </body>
+</html>
