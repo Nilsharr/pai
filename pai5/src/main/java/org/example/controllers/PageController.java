@@ -3,11 +3,9 @@ package org.example.controllers;
 import org.example.entities.Task;
 import org.example.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -34,19 +32,19 @@ public class PageController {
     @ResponseBody
     public String taskList(@PathVariable(value = "lessThan", required = false) Double lessThan, @PathVariable(value = "minCost", required = false) Double minCost, @PathVariable(value = "maxCost", required = false) Double maxCost) {
         if (lessThan != null) {
-            return getFormattedTaskList(taskRepository.findByCostLessThan(lessThan));
+            return getFormattedTaskList(taskRepository.findByCostLessThanOrderById(lessThan));
         }
         if (minCost != null && maxCost != null) {
-            return getFormattedTaskList(taskRepository.findByCostBetween(minCost, maxCost));
+            return getFormattedTaskList(taskRepository.findByCostBetweenOrderById(minCost, maxCost));
         }
 
-        return getFormattedTaskList(taskRepository.findByOrderByIdAsc());
+        return getFormattedTaskList(taskRepository.findByOrderById());
     }
 
     @RequestMapping("/taskListDone/{isDone}")
     @ResponseBody
     public String taskListByIsDone(@PathVariable(value = "isDone") Boolean isDone) {
-        return getFormattedTaskList(taskRepository.findByIsDone(isDone));
+        return getFormattedTaskList(taskRepository.findByIsDoneOrderById(isDone));
     }
 
 
