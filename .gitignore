@@ -24,6 +24,7 @@ hs_err_pid*
 replay_pid*
 
 ### IntelliJ IDEA ###
+target/
 .idea
 *.iws
 *.iml
@@ -38,6 +39,3 @@ replay_pid*
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
-/pai3/target/
-/pai4/target/
-/pai5/target/
