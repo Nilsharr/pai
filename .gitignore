@@ -40,3 +40,4 @@ build/
 !**/src/test/**/build/
 /pai3/target/
 /pai4/target/
+/pai5/target/
