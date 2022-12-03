@@ -35,11 +35,10 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerPagePOST(@Valid User user, BindingResult result) {
-        if (result.hasErrors()) {
-            return "register";
-        }
         if (dao.findByLogin(user.getLogin()) != null) {
             result.addError(new FieldError("user", "login", "Given login is taken"));
+        }
+        if (result.hasErrors()) {
             return "register";
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -61,21 +60,29 @@ public class UserController {
 
     @PostMapping("/editProfile")
     public String editProfilePagePOST(@Valid User user, BindingResult result) {
-        if (result.hasErrors()) {
-            return "editProfile";
-        }
+
         @SuppressWarnings("OptionalGetWithoutIsPresent")
         User current = dao.findById(user.getUserid()).get();
         if (!current.getLogin().equals(user.getLogin()) && dao.findByLogin(user.getLogin()) != null) {
             result.addError(new FieldError("user", "login", "Given login is taken"));
+        }
+        if (!user.getPassword().isBlank() && user.getPassword().length() < 6) {
+            result.addError(new FieldError("user", "password", "Password must consist of at least 6 characters"));
+        }
+        if (result.hasErrors()) {
             return "editProfile";
         }
-        if (!user.getPassword().isBlank()) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        } else {
+        if (user.getPassword().isBlank()) {
             user.setPassword(current.getPassword());
+        } else {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
+
+        String oldLogin = current.getLogin();
         dao.save(user);
+        if (!user.getLogin().equals(oldLogin)) {
+            return "redirect:/logout";
+        }
         return "profile";
     }
 
