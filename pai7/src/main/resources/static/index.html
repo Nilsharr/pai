@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Rest api</title>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
+    <script src="script.js"></script>
+    <style>
+        td {
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <div>
+            <div>
+                <h2>Students</h2>
+            </div>
+            <div>
+                <button type="button" onclick="showStudentCreateBox()">Create</button>
+            </div>
+            <br>
+        </div>
+
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="10%">Id</th>
+                        <th width="25%">Name</th>
+                        <th width="25%">Surname</th>
+                        <th width="20%">Average</th>
+                    </tr>
+                </thead>
+                <tbody id="studentsTable">
+                    <tr>
+                        <th scope="row" colspan="5">Loading...</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
